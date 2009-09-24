@@ -189,7 +189,8 @@ module Facebooker
       def create_new_facebook_session_and_redirect!
         session[:facebook_session] = new_facebook_session
         next_url = after_facebook_login_url || default_after_facebook_login_url
-        top_redirect_to session[:facebook_session].login_url({:next => next_url}) unless @installation_required
+	in_canvas = facebook_params['in_canvas']
+        top_redirect_to session[:facebook_session].login_url({:next => next_url,:canvas=>in_canvas}) unless @installation_required
         false
       end
       
